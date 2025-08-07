@@ -13,6 +13,15 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBar"
+            app:title="@string/about"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:titleTextColor="?attr/colorOnPrimary"
+            app:subtitleTextColor="#2490ad"
+            app:navigationIconTint="?attr/colorOnPrimary" />
         <ImageButton
             android:scaleType="fitCenter"
             android:id="@+id/imageView"
@@ -124,6 +133,6 @@
             android:textColor="@color/material_dynamic_primary0"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="https://github.com/fhyjs/ottohub_andriod" />
+            android:text="https://github.com/fhyjs/ottohub_app_web" />
     </LinearLayout>
 </ScrollView>
