@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="web_page_info">网页提示</string>
+    <string name="confirm">确定</string>
+    <string name="loading">加载中</string>
+    <string name="cancel">取消</string>
+    <string name="unable_open_file_chooser">无法打开文件选择器</string>
+    <string name="open_ext">打开外部应用</string>
+    <string name="open_ext_msg">这个页面想要打开“%s”</string>
+    <string name="exit">退出</string>
+    <string name="exit_msg">确认退出吗?</string>
+    <string name="download">下载</string>
+    <string name="download_msg">"确认下载？ "</string>
+    <string name="downloading">"下载中 "</string>
+    <string name="search">搜索</string>
+    <string name="home">返回主页</string>
+    <string name="version">版本</string>
+    <string name="package_name">包名</string>
+    <string name="build_time">构建时间</string>
+    <string name="git_comment">git提交</string>
+    <string name="about">关于</string>
+</resources>

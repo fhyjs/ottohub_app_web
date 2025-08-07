@@ -1,0 +1,87 @@
+plugins {
+    alias(libs.plugins.android.application)
+}
+
+android {
+    signingConfigs {
+        debug {
+            storeFile file('hanana.jks')
+            storePassword '12345678q'
+            keyPassword '12345678q'
+            keyAlias 'hananaapps'
+            enableV3Signing true
+            enableV3Signing true
+            enableV3Signing true
+            enableV4Signing true
+        }
+        release {
+            storeFile file('hanana.jks')
+            storePassword '12345678q'
+            keyPassword '12345678q'
+            keyAlias 'hananaapps'
+            enableV3Signing true
+            enableV3Signing true
+            enableV3Signing true
+            enableV4Signing true
+        }
+    }
+    namespace 'org.eu.hanana.reimu.ottohub_app_web'
+    compileSdk 36
+
+    defaultConfig {
+        multiDexEnabled true
+        android.buildFeatures.buildConfig = true
+        applicationId "org.eu.hanana.reimu.ottohub_app_web"
+        minSdk 21
+        targetSdk 36
+        versionCode 1
+        versionName "1.0_Code.Reimu"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        resConfigs "en", "zh" // Example: Support English and Chinses
+
+        buildConfigField "String", "BUILD_TIME", "\"${new Date().format("yyyy-MM-dd HH:mm:ss")}\""
+        def gitCommit = "unknown"
+        try {
+            def stdout = new ByteArrayOutputStream()
+            exec {
+                commandLine 'git', 'rev-parse', '--short', 'HEAD'
+                standardOutput = stdout
+            }
+            gitCommit = stdout.toString().trim()
+        } catch (Exception e) {
+            // ignore，没git时使用默认值
+        }
+        versionName=versionName+"_Git."+gitCommit
+        buildConfigField "String", "GIT_COMMIT", "\"${gitCommit}\""
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    buildFeatures {
+        viewBinding true
+    }
+    androidResources{
+        generateLocaleConfig true
+    }
+}
+
+dependencies {
+
+    implementation libs.appcompat
+    implementation libs.material
+    implementation libs.activity
+    implementation libs.constraintlayout
+    testImplementation libs.junit
+    androidTestImplementation libs.ext.junit
+    androidTestImplementation libs.espresso.core
+}

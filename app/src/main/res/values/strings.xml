@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name" translatable="false">ottohub</string>
+    <string name="web_page_info">Web page alert</string>
+    <string name="confirm">Confirm</string>
+    <string name="loading">Now Loading</string>
+    <string name="cancel">Cancle</string>
+    <string name="unable_open_file_chooser">Unable to open file chooser</string>
+    <string name="open_ext">Open external application</string>
+    <string name="open_ext_msg">The webpage requests to open \"%s\".</string>
+    <string name="exit">Exit</string>
+    <string name="exit_msg">Confirm to exit?</string>
+    <string name="download">Download</string>
+    <string name="download_msg">Confirm to dowmload?</string>
+    <string name="downloading">"Downloading "</string>
+    <string name="search">Search</string>
+    <string name="home">Home</string>
+    <string name="version">Version</string>
+    <string name="package_name">Package name</string>
+    <string name="build_time">Build time</string>
+    <string name="git_comment">Git Comment</string>
+    <string name="about">About</string>
+    <string name="ottohub" translatable="false">OTTOhub─=≡Σ((( つ•̀ω•́)つ衝刺～</string>
+</resources>
