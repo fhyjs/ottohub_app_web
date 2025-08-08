@@ -34,8 +34,8 @@ android {
         applicationId "org.eu.hanana.reimu.ottohub_app_web"
         minSdk 21
         targetSdk 36
-        versionCode 1
-        versionName "1.0_Code.Reimu"
+        versionCode 2
+        versionName "1.1_Code.Marisa"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
