@@ -7,9 +7,11 @@ import android.content.ActivityNotFoundException;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -41,11 +43,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.preference.PreferenceManager;
 
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
-import java.io.File;
+import org.eu.hanana.reimu.ottohub_app_web.frag.SettingsFragment;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Locale;
@@ -103,8 +107,7 @@ public class MainActivity extends AppCompatActivity {
                                 .setMessage(R.string.exit_msg)
                                 .setPositiveButton(R.string.confirm, (dialog, which) -> {
                                     // 当 WebView 无法后退时，调用系统默认返回行为
-                                    setEnabled(false);
-                                    getOnBackPressedDispatcher().onBackPressed();
+                                    finish();
                                 })
                                 .setNegativeButton(R.string.cancel, null)
                                 .show();
@@ -143,15 +146,16 @@ public class MainActivity extends AppCompatActivity {
                     view.clearHistory(); // 清空后退栈
                     shouldClearHistory --;
                 }
-                String scriptUrl = "https://app.files/index.js";//app内的虚拟文件地址（对应assets/web/index.js）
+                String scriptUrl = "https://app.files/injector.js";//app内的虚拟文件地址（对应assets/web/injector.js）
                 String js = ""
                         + "var script = document.createElement('script');"
                         + "script.src = '" + scriptUrl + "';"
                         + "script.type = 'text/javascript';"
                         + "script.async = false;"
                         + "document.head.appendChild(script);";
-
-                view.evaluateJavascript(js, null);
+                if (PreferenceManager.getDefaultSharedPreferences(MainActivity.this).getBoolean("inject_js",true)) {
+                    view.evaluateJavascript(js, null);
+                }
             }
 
             @Override
@@ -401,8 +405,27 @@ public class MainActivity extends AppCompatActivity {
                     .show();
         });
         webView.addJavascriptInterface(new JsInterface(),"ohapp");
+        //webView.addJavascriptInterface(new JavaJsInterface(),"Java");
         webView.loadUrl(url);
+        check();
     }
+
+    private void check() {
+        SharedPreferences defaultSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean first = defaultSharedPreferences.getBoolean("first", true);
+        if (first){
+            new MaterialAlertDialogBuilder(MainActivity.this)
+                    .setTitle(R.string.welcome)
+                    .setMessage(R.string.welcome_msg)
+                    .setPositiveButton(R.string.confirm, (dialog, which) -> {
+                        webView.loadUrl("https://m.ottohub.cn/b/20608");
+                    })
+                    .setNegativeButton(R.string.cancel, null)
+                    .show();
+        }
+        defaultSharedPreferences.edit().putBoolean("first",false).apply();
+    }
+
     protected class JsInterface{
         @JavascriptInterface
         public void setSearchEnable(boolean enable){
@@ -416,6 +439,30 @@ public class MainActivity extends AppCompatActivity {
         public void toast(String s){
             runOnUiThread(()->{
                 Toast.makeText(MainActivity.this, s, Toast.LENGTH_SHORT).show();
+            });
+        }
+        @JavascriptInterface
+        public String getLanguage(String s){
+            Locale locale = Resources.getSystem().getConfiguration().locale;
+            String language = locale.getLanguage();  // 语言代码，比如 "zh"
+            return language;
+        }
+        @JavascriptInterface
+        public void setProgress(int v){
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                runOnUiThread(()->webView.getWebChromeClient().onProgressChanged(webView,v));
+            }
+        }
+        @JavascriptInterface
+        public void injectJs(String scriptUrl){
+            String js = ""
+                    + "var script = document.createElement('script');"
+                    + "script.src = '" + scriptUrl + "';"
+                    + "script.type = 'text/javascript';"
+                    + "script.async = false;"
+                    + "document.head.appendChild(script);";
+            runOnUiThread(()->{
+                webView.evaluateJavascript(js, null);
             });
         }
     }
@@ -452,7 +499,7 @@ public class MainActivity extends AppCompatActivity {
             getOnBackPressedDispatcher().onBackPressed();
             return true;
         } else if (item.getItemId() == R.id.menu_btn_open) {
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(webView.getUrl()));
             this.startActivity(intent);
             return true;
         } else if (item.getItemId() == R.id.menu_btn_search) {
@@ -466,6 +513,16 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, AboutActivity.class);
             this.startActivity(intent);
             return true;
+        } else if (item.getItemId() == R.id.menu_settings) {
+            Intent intent = FragActivity.getIntent(this, null, SettingsFragment.class, getString(R.string.settings));
+            this.startActivity(intent);
+            return true;
+        } else if (item.getItemId() == R.id.menu_help) {
+            webView.loadUrl("https://m.ottohub.cn/b/20608");
+            return true;
+        } else if (item.getItemId() == R.id.menu_plugin) {
+            webView.loadUrl("https://app.files/webui/plugin/index.html");
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -478,4 +535,5 @@ public class MainActivity extends AppCompatActivity {
         shouldClearHistory = 2;
         webView.loadUrl(targetUrl);
     }
+
 }

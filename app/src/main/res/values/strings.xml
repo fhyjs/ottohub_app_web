@@ -20,4 +20,13 @@
     <string name="git_comment">Git Comment</string>
     <string name="about">About</string>
     <string name="ottohub" translatable="false">OTTOhub─=≡Σ((( つ•̀ω•́)つ衝刺～</string>
+    <string name="enable_mod">Enable modification</string>
+    <string name="enable_mod_message">Enable modification to the webpage</string>
+    <string name="settings">Settings</string>
+    <string name="help">help</string>
+    <string name="welcome">Welcome👋</string>
+    <string name="welcome_msg">It\'s the first time u use the app.\nNeed help?</string>
+    <string name="first_time">Show help</string>
+    <string name="first_time_message" translatable="false">A new begging!</string>
+    <string name="plugin">Plugin</string>
 </resources>

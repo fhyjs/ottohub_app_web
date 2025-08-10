@@ -1,5 +1,7 @@
 [versions]
 agp = "8.11.1"
+ecj = "4.6.1"
+groovy = "3.0.14"
 junit = "4.13.2"
 junitVersion = "1.3.0"
 espressoCore = "3.7.0"
@@ -7,8 +9,13 @@ appcompat = "1.7.1"
 material = "1.12.0"
 activity = "1.10.1"
 constraintlayout = "2.2.1"
+orgEclipseJdtCore = "3.32.0"
+preference = "1.2.1"
+r8 = "8.11.18"
 
 [libraries]
+ecj = { module = "org.eclipse.jdt:ecj", version.ref = "ecj" }
+groovy = { module = "org.codehaus.groovy:groovy", version.ref = "groovy" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -16,6 +23,9 @@ appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "a
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+org-eclipse-jdt-core = { module = "org.eclipse.jdt:org.eclipse.jdt.core", version.ref = "orgEclipseJdtCore" }
+preference = { module = "androidx.preference:preference", version.ref = "preference" }
+r8 = { module = "com.android.tools:r8", version.ref = "r8" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

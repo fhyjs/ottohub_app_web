@@ -19,4 +19,12 @@
     <string name="build_time">构建时间</string>
     <string name="git_comment">git提交</string>
     <string name="about">关于</string>
+    <string name="enable_mod">启用页面修改</string>
+    <string name="enable_mod_message">允许应用程序修改网页内容,否则将按照第一版应用的逻辑运行</string>
+    <string name="settings">设置</string>
+    <string name="help">帮助文档</string>
+    <string name="welcome">欢迎👋</string>
+    <string name="welcome_msg">哇袄!初次见面!\n你需要本应用的使用帮助吗?</string>
+    <string name="first_time">启动时显示帮助</string>
+    <string name="plugin">插件</string>
 </resources>

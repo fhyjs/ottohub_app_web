@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <SwitchPreferenceCompat
+        android:icon="@drawable/healing_24dp"
+        android:key="inject_js"
+        android:title="@string/enable_mod"
+        android:summary="@string/enable_mod_message"
+        android:defaultValue="true" />
+
+    <SwitchPreferenceCompat
+        android:icon="@drawable/waving_hand_24dp"
+        android:key="first"
+        android:title="@string/first_time"
+        android:summary="@string/first_time_message"
+        android:defaultValue="true" />
+</PreferenceScreen>
