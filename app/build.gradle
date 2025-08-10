@@ -56,7 +56,17 @@ android {
         versionName=versionName+"_Git."+gitCommit
         buildConfigField "String", "GIT_COMMIT", "\"${gitCommit}\""
     }
+    applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            def appName = "ottohub"
+            def versionName = variant.versionName
+            def buildType = variant.buildType.name
+            def date = new Date().format("yyyyMMdd_HHmmss")
 
+            // 自定义 APK 名
+            outputFileName = "${appName}_${versionName}_${buildType}_${date}.apk"
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false

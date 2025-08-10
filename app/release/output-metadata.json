@@ -12,8 +12,8 @@
       "filters": [],
       "attributes": [],
       "versionCode": 3,
-      "versionName": "1.2_Code.Cirno_Git.6d2172d",
-      "outputFile": "app-release.apk"
+      "versionName": "1.2_Code.Cirno_Git.a8d5a40",
+      "outputFile": "ottohub_1.2_Code.Cirno_Git.a8d5a40_release_20250810_174912.apk"
     }
   ],
   "elementType": "File",
@@ -22,14 +22,14 @@
       "minApi": 28,
       "maxApi": 30,
       "baselineProfiles": [
-        "baselineProfiles/1/app-release.dm"
+        "baselineProfiles/1/ottohub_1.2_Code.Cirno_Git.a8d5a40_release_20250810_174912.dm"
       ]
     },
     {
       "minApi": 31,
       "maxApi": 2147483647,
       "baselineProfiles": [
-        "baselineProfiles/0/app-release.dm"
+        "baselineProfiles/0/ottohub_1.2_Code.Cirno_Git.a8d5a40_release_20250810_174912.dm"
       ]
     }
   ],
